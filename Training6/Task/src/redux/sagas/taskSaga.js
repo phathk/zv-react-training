@@ -19,7 +19,7 @@ function* handleSubmit(action) {
         const status = ["error", "complete"];
         const nextStatus = status[Math.floor(Math.random() * status.length)];
         yield put({
-            type: ACTION_NAMES.CHANGE_TASK_STATUS_SUCCESS,
+            type: ACTION_NAMES.CHANGE_TASK_STATUS,
             data: {
                 task: action.data.task,
                 status: nextStatus,
@@ -30,17 +30,16 @@ function* handleSubmit(action) {
 export function* handleSubmitWatcher() {
     yield takeEvery(
         (action) =>
-            (action.type === ACTION_NAMES.CHANGE_TASK_STATUS_SUCCESS ||
-                action.type === ACTION_NAMES.CHANGE_TASK_STATUS) &&
+            action.type === ACTION_NAMES.CHANGE_TASK_STATUS &&
             action.data.status === "submitting",
         handleSubmit
     );
 }
 function* checkIfSubmitTask(action) {
     const network = yield select((state) => state.channelStatus);
-    if (action.data.status === "ready" && network) {
+    if (network) {
         yield put({
-            type: ACTION_NAMES.CHANGE_TASK_STATUS_SUCCESS,
+            type: ACTION_NAMES.CHANGE_TASK_STATUS,
             data: {
                 task: action.data.task,
                 status: "submitting",

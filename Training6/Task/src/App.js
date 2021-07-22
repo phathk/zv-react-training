@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Connection from "./Components/Connection/Connection";
 import Input from "./Components/Input/Input";
 import List from "./Components/List/List";
-import { useNetwork } from "./hooks/useNetwork";
 export default function App() {
     const dispatch = useDispatch();
-    const network = useNetwork();
+    const network = useSelector((state) => {
+        return state.channelStatus;
+    });
 
     useEffect(() => {
         dispatch({ type: "LISTEN_NETWORK", values: network });

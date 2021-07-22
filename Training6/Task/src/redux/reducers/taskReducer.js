@@ -13,7 +13,6 @@ export default function reducer(state = initialState, action) {
                 channelStatus: action.data.channelStatus,
             };
         case ACTION_NAMES.CHANGE_TASK_STATUS:
-        case ACTION_NAMES.CHANGE_TASK_STATUS_SUCCESS:
             return {
                 ...state,
                 task: state.task.map((item) => {

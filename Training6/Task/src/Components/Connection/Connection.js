@@ -1,7 +1,11 @@
 import React from "react";
-import { useNetwork } from "../../hooks/useNetwork";
+import { useSelector } from "react-redux";
+
 export default function Connection() {
-    const network = useNetwork();
+    const network = useSelector((state) => {
+        return state.channelStatus;
+    });
+
     return (
         <div
             className="wrapper"
