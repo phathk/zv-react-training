@@ -5,6 +5,7 @@ const NEXT_STATUS = {
     draft: "ready",
     error: "ready",
 };
+
 export default function List() {
     const tasks = useSelector((state) => {
         return state.task;
